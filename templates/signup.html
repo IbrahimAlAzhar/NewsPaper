@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %} <!--install the django crispy forms then define on settings file and here use it -->
+
+{% block title %}Sign Up{% endblock%}
+{% block content %}
+    <h2>Sign up</h2>
+    <form method="post">
+       {% csrf_token %}   <!--for sign up process you should create html file and create view file,you can create form file or using django build in form -->
+        {{ form|crispy }} <!--here use form crispy in place of using form as paragraph -->
+        <button class="btn btn-success" type="submit">Sign up</button> <!--for green button -->
+    </form>
+{% endblock %}

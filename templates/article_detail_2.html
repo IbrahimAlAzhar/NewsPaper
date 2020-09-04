@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="article-entry">
+    <h2>{{ object.title }}</h2> <!--in class based detailview pass object (build in) -->
+    <p>{{ object.author }} | {{ object.date }}</p>
+    <p>{{ object.body }}</p>
+</div>
+
+<!--here using django templating language's u r l tag wants u r l name and pass arguments,here we need pass
+ article.pk as a primary key-->
+<p><a href="{% url 'article_edit' article.pk %}">Edit</a> | <a href="{% url 'article_delete' article.pk %}">Delete</a>  </p>
+          <div class="card-footer"> <!--footer div class-->
+  {% for a in comments %} <!--comments means total number of comments which one is come from post detail function -->
+    <div class="comment">
+      <p class="info">
+        Comment {{ forloop.counter }} by {{ a.author }} <!--a person which amount of comments given this one shows in here -->
+        {{ a.email }}
+      </p>
+      {{ a.comment|linebreaks }}
+    </div>
+  {% empty %} <!--whenever there are no comments -->
+    <p>There are no comments yet.</p>
+  {% endfor %}
+
+  {% if new_comment %}
+    <h2>Your comment has been added.</h2>
+  {% else %}
+    <h2>Add a new comment</h2>
+    <form action="." method="post">
+      {{ comment_form.as_p }}
+      {% csrf_token %}
+      <p><input type="submit" value="Add comment"></p>
+    </form>
+  {% endif %}
+
+<p>Back to <a href="{% url 'article_list' %}">All Articles</a>.</p>
+{% endblock content %}

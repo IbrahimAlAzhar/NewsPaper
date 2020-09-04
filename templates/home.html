@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}Home {%endblock%}
+
+{% block content %}
+
+    <div class="jumbotron"> <!--this div class is jumbotron -->
+        <h1 class="display-4">Newspaper app</h1>
+        <p class="lead">A newspaper website build in Django</p>
+        {% if user.is_authenticated %}
+        <p class="lead"><a class="btn btn-primary btn-lg" href="{% url 'article_list' %}" role="button">View All Articles</a></p> <!--create a large primary button -->
+        {% else %}
+        <p class="lead"><a class="btn btn-primary btn-lg" href="{% url 'login' %}" role="button">LogIn here</a></p>
+        {% endif %}
+
+    </div>
+
+
+
+{% endblock %}

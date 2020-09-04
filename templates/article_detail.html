@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="article-entry">
+    <h2>{{ object.title }}</h2> <!--in class based detailview pass object (build in) -->
+    <p>{{ object.author }} | {{ object.date }}</p>
+    <p>{{ object.body }}</p>
+</div>
+
+<!--here using django templating language's u r l tag wants u r l name and pass arguments,here we need pass
+ article.pk as a primary key-->
+<p><a href="{% url 'article_edit' article.pk %}">Edit</a> | <a href="{% url 'article_delete' article.pk %}">Delete</a>  </p>
+          <div class="card-footer"> <!--footer div class-->
+              <!--take the all comments of a current article,comments is related name where returns all instances of comment model,all returns all of comment of this article  -->
+              {% for comment in article.comments.all %} <!--in a article take all of comments,comments is pass from comment model where it contains all comments of a article -->
+              <p>
+                  <span class="font-weight-bold">{{comment.author }} &middot; </span>
+                     {{ comment }}
+              </p>
+              <div class="dropdown-divider"></div>
+                {% endfor %}
+          </div>
+
+
+<p>Back to <a href="{% url 'article_list' %}">All Articles</a>.</p>
+{% endblock content %}

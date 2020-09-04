@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Delete</h1>
+    <form action="" method="post">
+        {% csrf_token %}
+        <p>Are you sure want to delete "{{article.title }}"?</p> <!--if you click then automatically this object is delete,which one is set from class based view and redirect to article_list which one is set on delete view-->
+        <button class="btn btn-danger ml-2" type="submit">Confirm</button> <!--red color button -->
+    </form>
+{% endblock %}
+
